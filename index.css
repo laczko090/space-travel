@@ -51,6 +51,8 @@ body {
     background-color: hsl(var(--clr-dark));
     line-height: 1.5;
     min-height: 100vh;
+    display: grid;
+    grid-template-rows: min-content 1fr;
 }
 
 /* Image setup */
@@ -105,6 +107,29 @@ select {
     max-width: 80rem;
 }
 
+.grid-container {
+    display: grid;
+}
+
+@media (min-width: 45rem) {
+    .grid-container {
+        column-gap: var(--container-gap, 2rem);
+        grid-template-columns: minmax(2rem, 1fr) repeat(2, minmax(0, 40rem)) minmax(2rem, 1fr) ;
+    }
+
+    .grid-container > *:first-child {
+        grid-column: 2;
+        outline: 1px solid red;
+    }
+    
+    .grid-container > *:last-child {
+        grid-column: 3;
+        outline: 1px solid yellow;
+    
+    }
+}
+
+
 .sr-only {
     position: absolute;
     width: 1px;
@@ -135,13 +160,13 @@ select {
 }
 
 .text-dark {
-    background-color: hsl(var(--clr-dark));
+    color: hsl(var(--clr-dark));
 }
 .text-accent {
-    background-color: hsl(var(--clr-light));
+    color: hsl(var(--clr-light));
 }
 .text-white {
-    background-color: hsl(var(--clr-white));
+    color: hsl(var(--clr-white));
 }
 
 /* typography */
@@ -221,7 +246,7 @@ select {
 
 .large-button {
     position: relative;
-    display: grid;
+    display: inline-grid;
     z-index: 1;
     place-items: center;
     padding: 0 2rem;
@@ -246,4 +271,56 @@ select {
 .large-button:focus::after {
     opacity: 1;
     transform: scale(1.5);
+}
+
+.primary-navigation {
+    --gap: 8rem;
+    --underline-gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.primary-navigation a {
+    text-decoration: none;
+}
+
+.primary-navigation a > span {
+    font-weight: 700;
+    margin-right: .5em;
+}
+
+.underline-indicators > * {
+    padding: var(--underline-gap, 1rem) 0;
+    border: 0;
+    cursor: pointer;
+    border-bottom: .2rem solid hsl(var(--clr-white) / .5);
+}
+
+.underline-indicators > .active,
+.underline-indicators > [aria-selected="true"] {
+    color: hsl(var(--clr-white) / 1);
+    border-color: hsl(var(--clr-white) / 1);
+}
+
+.tab-list {
+    --gap: 2rem;
+}
+
+.dot-indicators > * {
+    cursor: pointer;
+    border: 0;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    padding: .5em;
+    background-color: hsl(var(--clr-white) / .25);
+}
+
+.dot-indicators > *:hover,
+.dot-indicators > *:focus {
+    background-color: hsl(var(--clr-white) / .5);
+}
+
+.dot-indicators > [aria-selected="true"] {
+    border-color: hsl(var(--clr-white) / 1);
 }
